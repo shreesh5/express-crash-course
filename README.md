@@ -1,0 +1,1 @@
+Followed along with [this tutorial](https://www.youtube.com/watch?v=L72fhGm1tfE) to have a quick recap of Express
