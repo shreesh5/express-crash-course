@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
 
     // res.send(req.params.id)
     // req.params.id is sent as a string
-    if (found) {
+    if(found) {
         res.json(members.filter(member => member.id === parseInt(req.params.id)))
     } else {
         res.status(400).json({ msg: `No member with the id of ${req.params.id}`})
@@ -38,6 +38,25 @@ router.post('/', (req, res) => {
 
     members.push(newMember)
     res.json(members)
+})
+
+// Update member
+router.put('/:id', (req, res) => {
+    const found = members.some(member => member.id === parseInt(req.params.id))
+
+    if(found) {
+        const updMember = req.body
+        members.forEach(member => {
+            if(member.id === parseInt(req.params.id)) {
+                member.name = updMember.name ? updMember.name : member.name
+                member.email = updMember.email ? updMember.email : member.email
+
+                res.json({ msg: 'Member updated', member })
+            }
+        })
+    } else {
+        res.status(400).json({ msg: `No member with the id of ${req.params.id}`})
+    }
 })
 
 module.exports = router
